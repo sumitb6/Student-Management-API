@@ -1,0 +1,37 @@
+name: API Tests
+
+# 1. The Events (When the workflow should run)
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# 2. The Jobs (What the workflow should do)
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # 3. The Steps (How to do the job)
+    steps:
+      # Downloads your code onto the GitHub server
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Installs Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # Installs your API and Test dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi uvicorn pytest pydantic httpx
+
+      # Runs your main_test.py file
+      - name: Run pytest
+        run: pytest tests/

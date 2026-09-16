@@ -15,7 +15,7 @@ students: List[Student] = []
 
 @api.get("/")
 def index():
-    return {"Message" : "Hello World"}
+    return {"Message" : "Hello students"}
 
 @api.get("/student")
 def get_students():
