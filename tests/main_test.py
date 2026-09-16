@@ -5,13 +5,11 @@ from src.main import api
 client = TestClient(api)
 
 def test_home():
-
     response = client.get("/")
-
     assert response.status_code == 200
+    assert response.json() == {"Message": "Hello students"} # Updated line
 
-    assert response.json() == {"Message": "Hello World"}
-
+    
 def test_create_student():
 
     response = client.post("/student", json={
